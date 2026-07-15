@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
+<head><meta charset="utf-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>San Miguel Arcángel</title>
+
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
 
 <style>
 *{
@@ -139,7 +147,9 @@ fbq('track','PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1336911055017002&ev=PageView&noscript=1"/></noscript>
 <!-- End Meta Pixel -->
-<script src="/assets/fb-attribution.js"></script>
+<!-- fb-attribution.js: no live server this is /assets/fb-attribution.js (absolute path on HostGator).
+     For this CDN speed test we load it from the live origin so the script set is identical. -->
+<script src="https://secretosdelavida.life/assets/fb-attribution.js"></script>
 </head>
 <body>
 
@@ -163,14 +173,7 @@ src="https://www.facebook.com/tr?id=1336911055017002&ev=PageView&noscript=1"/></
 
     <div class="video-wrapper">
 
-        <vturb-smartplayer id="vid-6a1cb791fd67eee3dbcb135c" style="display:block;margin:0 auto;width:100%;max-width:400px;"></vturb-smartplayer>
-
-        <script type="text/javascript">
-        var s=document.createElement("script");
-        s.src="https://scripts.converteai.net/eb0dd09e-c2c6-4d8f-b4ba-a866ee3e6aca/players/6a1cb791fd67eee3dbcb135c/v4/player.js";
-        s.async=true;
-        document.head.appendChild(s);
-        </script>
+        <vturb-smartplayer id="ab-6a4ab221cdbea7c9b3889ddc" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/c8309163-65c6-431c-9e0c-40e9fa66bd53/ab-test/6a4ab221cdbea7c9b3889ddc/player.js", s.async=!0,document.head.appendChild(s); </script>
 
     </div>
 
@@ -290,27 +293,30 @@ src="https://www.facebook.com/tr?id=1336911055017002&ev=PageView&noscript=1"/></
 </div>
 
 <script>
-(function(){
-    var KEY = 'exitFired';
-    if(sessionStorage.getItem(KEY)) return;
+  // ALTERE O LINK PARA A PÁGINA QUE QUISER MOSTRAR QUANDO O USUÁRIO TENTAR SAIR
+  const link = 'https://secretosdelavida.life/angel/cancelado/';
 
-    // Mobile — intercepta botão voltar
-    history.pushState(null, '', location.href);
-    window.addEventListener('popstate', function(){
-        if(sessionStorage.getItem(KEY)) return;
-        sessionStorage.setItem(KEY, '1');
-        location.replace('https://secretosdelavida.life/angel/cancelado/');
-    });
+  function setBackRedirect(url) {
+    let urlBackRedirect = url;
+    urlBackRedirect = urlBackRedirect =
+      urlBackRedirect.trim() +
+      (urlBackRedirect.indexOf('?') > 0 ? '&' : '?') +
+      document.location.search.replace('?', '').toString();
 
-    // Desktop — mouse saindo pelo topo
-    document.addEventListener('mouseleave', function(e){
-        if(e.clientY <= 0){
-            if(sessionStorage.getItem(KEY)) return;
-            sessionStorage.setItem(KEY, '1');
-            location.replace('https://secretosdelavida.life/angel/cancelado/');
-        }
+    history.pushState({}, '', location.href);
+    history.pushState({}, '', location.href);
+    history.pushState({}, '', location.href);
+
+    window.addEventListener('popstate', () => {
+      console.log('onpopstate', urlBackRedirect);
+      setTimeout(() => {
+        location.href = urlBackRedirect;
+      }, 1);
     });
-})();
+  }
+
+  setBackRedirect(link);
 </script>
+
 </body>
 </html>
